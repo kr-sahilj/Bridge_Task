@@ -1,0 +1,18 @@
+const hre = require("hardhat");
+
+async function main() {
+
+  const NftContract = await hre.ethers.getContractFactory("PolyNft");
+  const contractInst = await NftContract.deploy();
+
+  await contractInst.deployed();
+  console.log("POLYNFT deployed to:", contractInst.address);
+
+}
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
