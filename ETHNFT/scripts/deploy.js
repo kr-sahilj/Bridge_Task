@@ -3,11 +3,11 @@ const { ethers ,upgrades} = require("hardhat");
 
 async function main() {
 
-  const NftContract = await ethers.getContractFactory("ETHNFT");
+  const NftContract = await ethers.getContractFactory("EthNft");
   const contractInst = await upgrades.deployProxy(NftContract);
   await contractInst.deployed();
   
-  console.log("ETHNFT deployed to:", contractInst.address);
+  console.log("EthNft deployed to:", contractInst.address);
 
 }
 

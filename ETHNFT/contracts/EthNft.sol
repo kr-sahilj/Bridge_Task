@@ -4,14 +4,15 @@ pragma solidity 0.8.18;
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract ETHNFT is ERC721Upgradeable  , OwnableUpgradeable{
+contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
     uint256 private count;
     // // Mapping from token ID to approved address
     // mapping(uint256 => address) private _tokenApprovals;
+    mapping(address => bool) public controllers;
     mapping(uint256=>uint256) private expiries;
 
     function initialize() external initializer {
-        __ERC721_init("ETHNFT","ETF");
+        __ERC721_init("ETHNFT","EFT");
         __Ownable_init();
     }
 
@@ -24,8 +25,7 @@ contract ETHNFT is ERC721Upgradeable  , OwnableUpgradeable{
         count++;
     }
 
-    function burnToken(uint256 tokenId)  external virtual {
-        require(msg.sender == ownerOf(tokenId),"You are not approved");
+    function burnToken(uint256 tokenId)  external  onlyController{
         _burn(tokenId);
     }
 
@@ -39,6 +39,18 @@ contract ETHNFT is ERC721Upgradeable  , OwnableUpgradeable{
 
     function ownerOf(uint256 tokenId) public view virtual override(ERC721Upgradeable) returns (address) {
         return super.ownerOf(tokenId);
+    }
+
+    function setController(address controller, bool enabled) external onlyOwner {
+        controllers[controller] = enabled;
+    }
+
+    modifier onlyController {
+        require(
+            controllers[msg.sender],
+            "Controllable: Caller is not a controller"
+        );
+        _;
     }
 
     
