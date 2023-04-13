@@ -45,6 +45,9 @@
   "dependencies": {
     "@ensdomains/buffer": "^0.0.13",
     "@ensdomains/solsha1": "0.0.3",
+    "@fxportal/maticjs-fxportal": "^1.1.1",
+    "@maticnetwork/maticjs-ethers": "^1.0.3",
+    "@maticnetwork/maticjs-web3": "^1.0.4",
     "@metamask/eth-sig-util": "^5.0.2",
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
     "@openzeppelin/contracts": "^4.1.0",

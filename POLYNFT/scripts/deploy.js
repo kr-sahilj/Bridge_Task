@@ -3,7 +3,8 @@ const hre = require("hardhat");
 async function main() {
 
   const NftContract = await hre.ethers.getContractFactory("PolyNft");
-  const contractInst = await NftContract.deploy();
+  const contractInst = await upgrades.deployProxy(NftContract);
+  await contractInst.deployed();
 
   await contractInst.deployed();
   console.log("POLYNFT deployed to:", contractInst.address);

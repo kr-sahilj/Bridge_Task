@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
 
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
 // IFxMessageProcessor represents interface to process message
 interface IFxMessageProcessor {
     function processMessageFromRoot(
@@ -13,7 +15,7 @@ interface IFxMessageProcessor {
 /**
  * @notice Mock child tunnel contract to receive and send message from L2
  */
-abstract contract FxBaseChildTunnel is IFxMessageProcessor {
+abstract contract FxBaseChildTunnel is Initializable,IFxMessageProcessor {
     // MessageTunnel on L1 will get data from this event
     event MessageSent(bytes message);
 
@@ -23,7 +25,7 @@ abstract contract FxBaseChildTunnel is IFxMessageProcessor {
     // fx root tunnel
     address public fxRootTunnel;
 
-    constructor(address _fxChild) {
+    function __FxBaseChildTunnel_init(address _fxChild) internal initializer {
         fxChild = _fxChild;
     }
 
