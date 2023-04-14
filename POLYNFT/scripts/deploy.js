@@ -3,11 +3,19 @@ const hre = require("hardhat");
 async function main() {
 
   const NftContract = await hre.ethers.getContractFactory("PolyNft");
-  const contractInst = await upgrades.deployProxy(NftContract);
-  await contractInst.deployed();
+  const polyNftInst = await upgrades.deployProxy(NftContract);
+  await polyNftInst.deployed();
 
-  await contractInst.deployed();
-  console.log("POLYNFT deployed to:", contractInst.address);
+  console.log("POLYNFT deployed to:", polyNftInst.address);
+
+  const FxERC721Child = await hre.ethers.getContractFactory("FxERC721ChildTunnel");
+  const childAddress = polyNftInst.address;
+  const rootAddress = "";
+  const _fxChild = "0xCf73231F28B7331BBe3124B907840A94851f9f11";
+  const FxERC721ChildTunnelInst = await upgrades.deployProxy(FxERC721Child,[childAddress,rootAddress,_fxChild],{ initializer: 'initialize(address,address,address)' });
+  await FxERC721ChildTunnelInst.deployed();
+
+  console.log("FxERC721ChildTunnel deployed to : ". FxERC721ChildTunnelInst.address);
 
 }
 

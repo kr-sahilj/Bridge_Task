@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
@@ -25,6 +25,9 @@ abstract contract FxBaseChildTunnel is Initializable,IFxMessageProcessor {
     // fx root tunnel
     address public fxRootTunnel;
 
+    function initialize(address _fxChild) external initializer {
+        __FxBaseChildTunnel_init(_fxChild);
+    }
     function __FxBaseChildTunnel_init(address _fxChild) internal initializer {
         fxChild = _fxChild;
     }

@@ -5,7 +5,7 @@ import {RLPReader} from "lib/RLPReader.sol";
 import {MerklePatriciaProof} from "lib/MerklePatriciaProof.sol";
 import {Merkle} from "lib/Merkle.sol";
 import "lib/ExitPayloadReader.sol";
-
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 interface IFxStateSender {
     function sendMessageToChild(address _receiver, bytes calldata _data) external;
@@ -27,7 +27,7 @@ contract ICheckpointManager {
     mapping(uint256 => HeaderBlock) public headerBlocks;
 }
 
-abstract contract FxBaseRootTunnel {
+abstract contract FxBaseRootTunnel is Initializable {
     using RLPReader for RLPReader.RLPItem;
     using Merkle for bytes32;
     using ExitPayloadReader for bytes;
@@ -49,7 +49,15 @@ abstract contract FxBaseRootTunnel {
     // storage to avoid duplicate exits
     mapping(bytes32 => bool) public processedExits;
 
-    constructor(address _checkpointManager, address _fxRoot) {
+    function initialize(
+        address _checkpointManager, 
+        address _fxRoot) 
+        external 
+        initializer {
+            __FxBaseRootTunnel_init(_checkpointManager, _fxRoot);
+    }
+
+    function __FxBaseRootTunnel_init(address _checkpointManager, address _fxRoot) internal initializer {
         checkpointManager = ICheckpointManager(_checkpointManager);
         fxRoot = IFxStateSender(_fxRoot);
     }

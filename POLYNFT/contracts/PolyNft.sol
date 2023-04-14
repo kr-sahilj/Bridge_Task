@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract PolyNft is ERC721Upgradeable , OwnableUpgradeable{
+contract PolyNft is OwnableUpgradeable, ERC721Upgradeable{
     uint256 private count;
     // // Mapping from token ID to approved address
     // mapping(uint256 => address) private _tokenApprovals;

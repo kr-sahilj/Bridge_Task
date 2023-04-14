@@ -16,6 +16,10 @@ contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
         __Ownable_init();
     }
 
+    function mintForBridge(address to, uint256 tokenId, uint256 timestamp ) external {
+        setExpiry(tokenId, timestamp);
+        _safeMint(to, tokenId);
+    }
     function mintToken(address to, uint expiry) external {
         uint256 tokenId = count;
         require(expiry>=1 && expiry<=5,"Expiry years not within the range");

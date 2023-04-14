@@ -1,14 +1,25 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity 0.8.4;
 
 import {PolyNft} from "./PolyNft.sol";
 import {FxBaseChildTunnel} from "./FxBaseChildTunnel.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract FxERC721ChildTunnel is FxBaseChildTunnel, PolyNft {
-    address private childToken;
-    address private rootToken;
+contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
+    address public childToken;
+    address public rootToken;
 
-    function __FxERC721ChildTunnel_init(address _childToken, address _rootToken, address _fxChild) external initializer {
+    function initialize(
+        address _childToken, 
+        address _rootToken, 
+        address _fxChild) 
+        external 
+        initializer {
+            __FxERC721ChildTunnel_init(_childToken, _rootToken, _fxChild);
+    } 
+
+    function __FxERC721ChildTunnel_init(address _childToken, address _rootToken, address _fxChild) internal initializer {
+        __Ownable_init_unchained();
         __FxBaseChildTunnel_init(_fxChild);
         childToken = _childToken;
         rootToken = _rootToken;
@@ -16,11 +27,13 @@ contract FxERC721ChildTunnel is FxBaseChildTunnel, PolyNft {
 
     // bytes32 public constant MAP_TOKEN = keccak256("MAP_TOKEN");
 
-    function setChildToken(address _childToken) external {
+    function setChildToken(address _childToken) external onlyOwner {
+        require(_childToken != address(0),"Should be not zero");
         childToken = _childToken;
     }
 
-    function setRootToken(address _rootToken) external {
+    function setRootToken(address _rootToken) external onlyOwner { 
+        require(_rootToken != address(0),"Should be not zero");
         rootToken = _rootToken;
     }
     
@@ -34,7 +47,7 @@ contract FxERC721ChildTunnel is FxBaseChildTunnel, PolyNft {
         uint256, /* stateId */
         address sender,
         bytes memory data
-    ) internal override validateSender(sender) {
+    ) internal virtual override validateSender(sender) {
         // decode incoming data
         // (bytes32 syncType, bytes memory syncData) = abi.decode(data, (bytes32, bytes));
 
