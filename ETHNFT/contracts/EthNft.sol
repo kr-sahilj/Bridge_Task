@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
-    uint256 private count;
+    uint256 private count=1;
     // // Mapping from token ID to approved address
     // mapping(uint256 => address) private _tokenApprovals;
     mapping(address => bool) public controllers;
@@ -20,6 +20,7 @@ contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
         setExpiry(tokenId, timestamp);
         _safeMint(to, tokenId);
     }
+    
     function mintToken(address to, uint expiry) external {
         uint256 tokenId = count;
         require(expiry>=1 && expiry<=5,"Expiry years not within the range");

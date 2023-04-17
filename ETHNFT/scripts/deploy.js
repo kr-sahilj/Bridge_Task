@@ -1,5 +1,5 @@
 const { ethers ,upgrades} = require("hardhat");
-// const hre = require("hardhat");
+const hre = require("hardhat");
 
 async function main() {
 
