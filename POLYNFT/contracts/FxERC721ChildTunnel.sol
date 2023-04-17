@@ -9,12 +9,16 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
     address public childToken;
     address public rootToken;
 
+    //events
+    event SetChildToken(address childToken);
+    event SetRootToken(address rootToken);
+    event Withdraw(address sender,uint256 tokenId);
+
     function initialize(
         address _childToken, 
         address _rootToken, 
         address _fxChild) 
-        external 
-        initializer {
+        external initializer {
             __FxERC721ChildTunnel_init(_childToken, _rootToken, _fxChild);
     } 
 
@@ -30,17 +34,20 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
     function setChildToken(address _childToken) external onlyOwner {
         require(_childToken != address(0),"Should be not zero");
         childToken = _childToken;
+        emit SetChildToken(childToken);
     }
 
     function setRootToken(address _rootToken) external onlyOwner { 
         require(_rootToken != address(0),"Should be not zero");
         rootToken = _rootToken;
+        emit SetRootToken(rootToken);
     }
     
     function withdraw(
         uint256 tokenId
     ) external {
         _withdraw(msg.sender, tokenId);
+        emit Withdraw(msg.sender,tokenId);
     }
 
     function _processMessageFromRoot(

@@ -9,12 +9,15 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel{
     address public childToken;
     address public rootToken;
     
+    //events
     event FxWithdrawERC721(
         address indexed rootToken,
         address indexed childToken,
         address indexed userAddress,
         uint256 id
     );
+    event SetChildToken(address childToken);
+    event SetRootToken(address rootToken);
     
     function initialize(
         address _checkpointManager,
@@ -42,11 +45,13 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel{
     function setChildToken(address _childToken) external onlyOwner {
         require(_childToken != address(0),"Should be not zero");
         childToken = _childToken;
+        emit SetChildToken(childToken);
     }
 
     function setRootToken(address _rootToken) external onlyOwner {
         require(_rootToken != address(0),"Should be not zero");
         rootToken = _rootToken;
+        emit SetRootToken(rootToken);
     }
 
     // bytes32 public immutable childTokenTemplateCodeHash;

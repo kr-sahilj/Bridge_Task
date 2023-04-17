@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 contract PolyNft is OwnableUpgradeable, ERC721Upgradeable{
-    uint256 private count=1000;
+    uint256 public count;
     // // Mapping from token ID to approved address
     // mapping(uint256 => address) private _tokenApprovals;
     mapping(address => bool) public controllers;
@@ -14,6 +14,7 @@ contract PolyNft is OwnableUpgradeable, ERC721Upgradeable{
     function initialize() external initializer {
         __ERC721_init("POLYNFT","PFT");
         __Ownable_init();
+        count=1000;
     }
 
     function mintToken(address to, uint expiry) external {

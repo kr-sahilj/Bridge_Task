@@ -4,8 +4,8 @@ pragma solidity 0.8.4;
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
-    uint256 private count=1;
+contract EthNft is OwnableUpgradeable, ERC721Upgradeable {
+    uint256 public count;
     // // Mapping from token ID to approved address
     // mapping(uint256 => address) private _tokenApprovals;
     mapping(address => bool) public controllers;
@@ -14,6 +14,7 @@ contract EthNft is ERC721Upgradeable , OwnableUpgradeable{
     function initialize() external initializer {
         __ERC721_init("ETHNFT","EFT");
         __Ownable_init();
+        count=1;
     }
 
     function mintForBridge(address to, uint256 tokenId, uint256 timestamp ) external {
