@@ -3,6 +3,7 @@ const hre = require("hardhat");
 
 const isFreshDeploy = true;
 async function main() {
+
   if(isFreshDeploy){
     const NftContract = await ethers.getContractFactory("EthNft");
     const EthNftInst = await upgrades.deployProxy(NftContract);
@@ -10,6 +11,7 @@ async function main() {
 
     console.log("EthNft deployed to:", EthNftInst.address);
   }
+  
   else{
     const NftContract = await ethers.getContractFactory("EthNft");
     const EthNftAddress="";

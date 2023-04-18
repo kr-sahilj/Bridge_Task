@@ -9,10 +9,24 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
     address public childToken;
     address public rootToken;
 
+    // bool 
+    bool public bridgeState;
+
+
+    
     //events
     event SetChildToken(address childToken);
     event SetRootToken(address rootToken);
-    event Withdraw(address sender,uint256 tokenId);
+    event Withdraw(address rootToken, address childToken, address receiver,uint256[] tokenId, uint256[] expiry);
+
+    //modifier
+    modifier bridgeEnabled {
+        require(
+            bridgeState,
+            "bridgeWorking: bridge is not in working state"
+        );
+        _;
+    }
 
     function initialize(
         address _childToken, 
@@ -43,11 +57,16 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
         emit SetRootToken(rootToken);
     }
     
+    function setBridgeState(bool _bridgeState) external onlyOwner {
+        bridgeState = _bridgeState;
+    }
+
+
     function withdraw(
-        uint256 tokenId
-    ) external {
+        uint256[] memory tokenId
+    ) external bridgeEnabled{
+        
         _withdraw(msg.sender, tokenId);
-        emit Withdraw(msg.sender,tokenId);
     }
 
     function _processMessageFromRoot(
@@ -81,8 +100,10 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
 
     function _withdraw(
         address receiver,
-        uint256 tokenId
+        uint256[] memory tokenId
     ) internal {
+
+        uint256[] memory expiries = new uint256[](tokenId.length);
         PolyNft childTokenContract = PolyNft(childToken);
 
         // validate root and child token address
@@ -90,16 +111,28 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel {
             childToken != address(0x0) && rootToken != address(0x0),
             "FxERC721ChildTunnel: Should have proper addresses"
         );
+        
+        for(uint256 i = 0; i < tokenId.length; i++)
+        {
+            require(msg.sender == childTokenContract.ownerOf(tokenId[i]));
 
-        require(msg.sender == childTokenContract.ownerOf(tokenId));
+            // withdraw tokens
+            expiries[i] = childTokenContract.nameExpires(tokenId[i]);
 
-        // withdraw tokens
-        uint256 expiry = childTokenContract.nameExpires(tokenId);
-        childTokenContract.burnToken(tokenId);
+            require(expiries[i]>=block.timestamp,"Domain is expired");
+        }
 
+        for(uint256 i = 0; i < tokenId.length; i++)
+        {
+            childTokenContract.burnToken(tokenId[i]);
+        }
+        
         // send message to root regarding token burn
-        _sendMessageToRoot(abi.encode(rootToken, childToken, receiver, tokenId, expiry));
+        _sendMessageToRoot(abi.encode(rootToken, childToken, receiver, tokenId, expiries));
+        emit Withdraw(rootToken, childToken, receiver, tokenId, expiries);
     }
+    
+
     
 }
 

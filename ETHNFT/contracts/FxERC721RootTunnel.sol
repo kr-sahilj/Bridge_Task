@@ -14,7 +14,7 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel{
         address indexed rootToken,
         address indexed childToken,
         address indexed userAddress,
-        uint256 id
+        uint256[] id
     );
     event SetChildToken(address childToken);
     event SetRootToken(address rootToken);
@@ -68,9 +68,9 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel{
 
     // exit processor
     function _processMessageFromChild(bytes memory data) internal virtual override {
-        (address rootTokenFromChild, address childTokenFromChild, address to, uint256 tokenId, uint256 expiry) = abi.decode(
+        (address rootTokenFromChild, address childTokenFromChild, address to, uint256[] memory tokenId, uint256[] memory expiry) = abi.decode(
             data,
-            (address, address, address, uint256, uint256)
+            (address, address, address, uint256[] , uint256[])
         );
 
         // validate addressed for root to child
@@ -80,13 +80,21 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel{
         //Validate to address
         require(to != address(0),"Should be not zero");
 
-        //validate tokenId
-        require(tokenId!=0,"Invalid tokenId");
+        //validate tokenIds
+        for(uint256 i = 0; i < tokenId.length; i++)
+        {
+            require(tokenId[i]!=0,"Invalid tokenId");
+        }
 
+        for(uint256 i = 0; i < tokenId.length; i++)
+        {
+            EthNft(rootToken).mintForBridge(to, tokenId[i], expiry[i]);
+        }
 
         // transfer from tokens to
         
-        EthNft(rootToken).mintForBridge(to, tokenId, expiry);
+        
         emit FxWithdrawERC721(rootToken, childToken, to, tokenId);
+        
     }
 }
