@@ -7,17 +7,18 @@ FxStateChildTunnel.sol: https://github.com/fx-portal/contracts/blob/main/contrac
 FxBaseChildTunnel.sol : https://github.com/fx-portal/contracts/blob/main/contracts/tunnel/FxBaseChildTunnel.sol
 
 
-POLYNFT deployed to: 0xE891016D6957e4C3e8960f611c653B1428DF4613
-EthNft deployed to: 0x692527E3754e10DB39C4be81E886DE43158f6663
-FxERC721ChildTunnel deployed to :  0x317C5703E866c2605b82D23c8966787D546a6354
-FxERC721RootTunnel deployed to :  0x1fD239D5035f23a04ACf0c8aB55d3E8939E4C920
+
+
+POLYNFT deployed to: 0xfFB7E813586Ce5119AF0c74b5fC77F905783B56E
+EthNft deployed to: 0x5E7981f7f890bf0EFe1c0f6C4EedE0cE624f5745
+FxERC721ChildTunnel deployed to :  0xe5afA536D9Bc51acc8C5ea69EB0446b71A543a7C
+FxERC721RootTunnel deployed to :  0x893d12F7D850BA5208eBd2c2B356372865E9A943
 
 
 
+POLYNFT deployed to: 0x2fAA55fE6164af01c09Ff975358b15590e30B032
+EthNft deployed to: 0x19F31372793c877de51DC0D739eef0666e1FC247
+FxERC721ChildTunnel deployed to :  0x9F11Ce461e37d4Ea075E990FC38602c9AdCF5BD3
+FxERC721RootTunnel deployed to :  0x95e1E1D60d5971c53e0128d695d67B2E35b897F6
 
 
-
-POLYNFT deployed to: 0x42Bb3C95Bc94e3507c83dDaAD9F18128430E42e4
-EthNft deployed to: 0x53859d2Eed1edf843856Be79D7419Cbad77D64C8
-FxERC721ChildTunnel deployed to :  0xC286f623aF95838c78Acc31BFDec96A49e1fF562
-FxERC721RootTunnel deployed to :  0x051292276Dc9Df94660eB76bB38D2bBb1771C15e

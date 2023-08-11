@@ -46,6 +46,10 @@ abstract contract FxBaseRootTunnel is Initializable {
     // child tunnel contract which receives and sends messages
     address public fxChildTunnel;
 
+    // event
+    event InputCheck1(bytes blockProof, bytes32 txRoot, bytes32 receiptRoot, bytes receiptProof, bytes indexed message);
+    event InputCheck(bytes indexed inputData, bytes indexed message);
+
     // storage to avoid duplicate exits
     mapping(bytes32 => bool) public processedExits;
 
@@ -132,6 +136,10 @@ abstract contract FxBaseRootTunnel is Initializable {
 
         // received message data
         bytes memory message = abi.decode(log.getData(), (bytes)); // event decodes params again, so decoding bytes to get message
+        bytes memory blockProof = payload.getBlockProof();
+        bytes32 txRoot = payload.getTxRoot();
+        bytes memory receiptProof = payload.getReceiptProof();
+        emit InputCheck1(blockProof, txRoot, receiptRoot, receiptProof, message);
         return message;
     }
 
@@ -174,6 +182,7 @@ abstract contract FxBaseRootTunnel is Initializable {
     function receiveMessage(bytes memory inputData) public virtual {
         bytes memory message = _validateAndExtractMessage(inputData);
         _processMessageFromChild(message);
+        emit InputCheck(inputData, message);
     }
 
     /**
