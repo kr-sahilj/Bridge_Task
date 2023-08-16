@@ -31,9 +31,9 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
         address indexed rootToken,
         address indexed depositor,
         address indexed userAddress,
-        uint256 id
+        uint256[] id
     );
-    
+
     bytes32 public childTokenTemplateCodeHash;
 
     function initialize(
@@ -57,8 +57,10 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
             __FxBaseRootTunnel_init(_checkpointManager,_fxRoot);
             childToken = _childToken;
             rootToken = _rootToken;
-            childTokenTemplateCodeHash = keccak256(minimalProxyCreationCode(_rootToken));
+            childTokenTemplateCodeHash = keccak256(minimalProxyCreationCode(childToken)); 
     }
+
+    
 
     function onERC721Received(
         address /* operator */,
@@ -82,6 +84,7 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
         rootToken = _rootToken;
         emit SetRootToken(rootToken);
     }
+    
     
 
     // bytes32 public immutable childTokenTemplateCodeHash;
@@ -110,46 +113,47 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
 
         // compute child token address before deployment using create2
         bytes32 salt = keccak256(abi.encodePacked(rootToken));
-        address childToken = computedCreate2Address(salt, childTokenTemplateCodeHash, fxChildTunnel);
+        address childToken1 = computedCreate2Address(salt, childTokenTemplateCodeHash, fxChildTunnel);
 
         // add into mapped tokens
-        rootToChildTokens[rootToken] = childToken;
-        emit TokenMappedERC721(rootToken, childToken);
+        rootToChildTokens[rootToken] = childToken1;
+        emit TokenMappedERC721(rootToken, childToken1);
     }
 
-    function deposit(address rootToken, address user, uint256 tokenId, bytes memory data) public {
+    function deposit(address rootToken1, address user, uint256[] memory tokenId, bytes memory data) public {
         // map token if not mapped
-        EthNft rootTokenContract = EthNft(rootToken);
-        uint256 expiry;
+        EthNft rootTokenContract = EthNft(rootToken1);
+        uint256[] memory expiries = new uint256[](tokenId.length);
 
-        if (rootToChildTokens[rootToken] == address(0x0)) {
-            mapToken(rootToken);
+        if (rootToChildTokens[rootToken1] == address(0x0)) {
+            mapToken(rootToken1);
         }
         
 
-        // for(uint256 i = 0; i < tokenId.length; i++)
-        // {
-        require(msg.sender == rootTokenContract.ownerOf(tokenId));
+        for(uint256 i = 0; i < tokenId.length; i++)
+        {
+            require(msg.sender == rootTokenContract.ownerOf(tokenId[i]));
 
-        // withdraw tokens
-        expiry = rootTokenContract.nameExpires(tokenId);
+            // withdraw tokens
+            expiries[i] = rootTokenContract.nameExpires(tokenId[i]);
 
-        require(expiry>=block.timestamp,"Domain is expired");
+            require(expiries[i]>=block.timestamp,"Domain is expired");
 
-        // transfer from depositor to this contract
-        rootTokenContract.safeTransferFrom(
-            msg.sender, // depositor
-            address(this), // manager contract
-            tokenId,
-            data
-        );
+            // transfer from depositor to this contract
+            rootTokenContract.safeTransferFrom(
+                msg.sender, // depositor
+                address(this), // manager contract
+                tokenId[i],
+                data
+            );
+        }
 
         // rootTokenContract.burnToken(tokenId);
 
         // DEPOSIT, encode(rootToken, depositor, user, tokenId, extra data)
-        bytes memory message = abi.encode(DEPOSIT, abi.encode(rootToken, msg.sender, user, tokenId, expiry, data));
+        bytes memory message = abi.encode(DEPOSIT, abi.encode(rootToken1, msg.sender, user, tokenId, expiries, data));
         _sendMessageToChild(message);
-        emit FxDepositERC721(rootToken, msg.sender, user, tokenId);
+        emit FxDepositERC721(rootToken1, msg.sender, user, tokenId);
     }
 
     // exit processor

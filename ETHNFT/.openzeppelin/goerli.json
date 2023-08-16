@@ -169,6 +169,31 @@
       "address": "0xF6C87d028aef26192CA9232b8169b5561FBf72d8",
       "txHash": "0x7fd219d864738dd462afef8958b61a512af0d11ada36b0324eea6280678e19aa",
       "kind": "transparent"
+    },
+    {
+      "address": "0x06A16dfF6a76D73B69fAe964d73d66AFD406aB6b",
+      "txHash": "0x143510f492e88efe59db2a1fd9b1ea65b3e1e10d53ae9365480eed470b157198",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xC927e223bD3ccE54626Fb894bEEA3bB73C442F1e",
+      "txHash": "0x6dfc0f5e1772b21012b594ccc1a5c6e2efa17ae92aa4ba06a047b07d84f8689f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xb050F0E6A70fCB07261aC96A9B151CaA0de60E11",
+      "txHash": "0x03fe198c8947d23334b170780c1a99eeba166c2fee58764c41b7123b6b22b2c7",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x99c53C63302e0f2c19FDe8792de8c77A742d43E3",
+      "txHash": "0x399fffd77056affd58cbdf4b2e51f12e863529e3ed7c98fd310c6a83998dda86",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x6d27acebE8D385A7Dbc62A13a08F280b47b25085",
+      "txHash": "0x73cffcf40421016f41e73a46d22c2cf43f762b8034b7a87955ab04959b4a30c3",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -2975,6 +3000,646 @@
     "cf6ddb4c225c16f18e0c3b95c1136e891583494761f8ea7c6b7a272c2cbb5266": {
       "address": "0x45b098887f201E59dF31353F957f2745D0367322",
       "txHash": "0xedc5be300e6f95c5a3a635e50c72d6c09877537509341f9f85ce933ad73063c4",
+      "layout": {
+        "solcVersion": "0.8.4",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "fxRoot",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_contract(IFxStateSender)3054",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:43"
+          },
+          {
+            "label": "checkpointManager",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_contract(ICheckpointManager)3072",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:45"
+          },
+          {
+            "label": "fxChildTunnel",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:47"
+          },
+          {
+            "label": "processedExits",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:54"
+          },
+          {
+            "label": "childToken",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:11"
+          },
+          {
+            "label": "rootToken",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:12"
+          },
+          {
+            "label": "rootToChildTokens",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_mapping(t_address,t_address)",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:17"
+          },
+          {
+            "label": "childTokenTemplateCodeHash",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_bytes32",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(ICheckpointManager)3072": {
+            "label": "contract ICheckpointManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IFxStateSender)3054": {
+            "label": "contract IFxStateSender",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_address)": {
+            "label": "mapping(address => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "9de5e2154918706ff784d278c86053a4ac91926924743dc68fb032a35ee23b37": {
+      "address": "0xf47814f47b81a9AC499d622C5639690B83773B1D",
+      "txHash": "0xcc21a81843880ea23953b4a779fa9375c174e280b5c576269aa0e4585e7f68e1",
+      "layout": {
+        "solcVersion": "0.8.4",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "fxRoot",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_contract(IFxStateSender)3054",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:43"
+          },
+          {
+            "label": "checkpointManager",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_contract(ICheckpointManager)3072",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:45"
+          },
+          {
+            "label": "fxChildTunnel",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:47"
+          },
+          {
+            "label": "processedExits",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:54"
+          },
+          {
+            "label": "childToken",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:11"
+          },
+          {
+            "label": "rootToken",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:12"
+          },
+          {
+            "label": "rootToChildTokens",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_mapping(t_address,t_address)",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:17"
+          },
+          {
+            "label": "childTokenTemplateCodeHash",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_bytes32",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(ICheckpointManager)3072": {
+            "label": "contract ICheckpointManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IFxStateSender)3054": {
+            "label": "contract IFxStateSender",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_address)": {
+            "label": "mapping(address => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "76edcfad8f33c55c23bb81b002995c3656a4c86fdb5021524273b5cc0add8b76": {
+      "address": "0x7e3CBE950C66549aDA5129d470190Af0f7659565",
+      "txHash": "0xa006a547588b92f2836247b82a6f500ae0e4760914ce9661ea43f6daf909b686",
+      "layout": {
+        "solcVersion": "0.8.4",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "fxRoot",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_contract(IFxStateSender)3054",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:43"
+          },
+          {
+            "label": "checkpointManager",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_contract(ICheckpointManager)3072",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:45"
+          },
+          {
+            "label": "fxChildTunnel",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:47"
+          },
+          {
+            "label": "processedExits",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:54"
+          },
+          {
+            "label": "childToken",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:11"
+          },
+          {
+            "label": "rootToken",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:12"
+          },
+          {
+            "label": "rootToChildTokens",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_mapping(t_address,t_address)",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:17"
+          },
+          {
+            "label": "childTokenTemplateCodeHash",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_bytes32",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(ICheckpointManager)3072": {
+            "label": "contract ICheckpointManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IFxStateSender)3054": {
+            "label": "contract IFxStateSender",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_address)": {
+            "label": "mapping(address => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "cd13963d885ff7d3589964f8940a0e9ae9e493a0667e760a06c72ca8432cf2d7": {
+      "address": "0x29b7D6104ddb51333FB155Cd77025640040bF14f",
+      "txHash": "0xfb7fd7d1dc2457e802ab12b3e10d95a84fb0e4f2b0d61731e6128fca0acd7668",
+      "layout": {
+        "solcVersion": "0.8.4",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "fxRoot",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_contract(IFxStateSender)3054",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:43"
+          },
+          {
+            "label": "checkpointManager",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_contract(ICheckpointManager)3072",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:45"
+          },
+          {
+            "label": "fxChildTunnel",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:47"
+          },
+          {
+            "label": "processedExits",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "FxBaseRootTunnel",
+            "src": "contracts/FxBaseRootTunnel.sol:54"
+          },
+          {
+            "label": "childToken",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:11"
+          },
+          {
+            "label": "rootToken",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:12"
+          },
+          {
+            "label": "rootToChildTokens",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_mapping(t_address,t_address)",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:17"
+          },
+          {
+            "label": "childTokenTemplateCodeHash",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_bytes32",
+            "contract": "FxERC721RootTunnel",
+            "src": "contracts/FxERC721RootTunnel.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(ICheckpointManager)3072": {
+            "label": "contract ICheckpointManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IFxStateSender)3054": {
+            "label": "contract IFxStateSender",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_address)": {
+            "label": "mapping(address => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "7521ac134d42bc7174934ccef5edd2971853705249f7420ef62e0a71d4b3b816": {
+      "address": "0x12817CCEDd1C441A85d8d6DA8D85dD3Dc79B0eeA",
+      "txHash": "0xee330337eae7ebcdbd5d3df2d657555060b2a3530d965593d5ef9f0754d76d18",
       "layout": {
         "solcVersion": "0.8.4",
         "storage": [

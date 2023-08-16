@@ -2,7 +2,7 @@ const { ethers ,upgrades} = require("hardhat");
 const hre = require("hardhat");
 
 
-const isFreshDeploy = false;
+const isFreshDeploy = true;
 async function main() {
 
   if(isFreshDeploy){
