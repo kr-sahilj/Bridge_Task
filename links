@@ -7,7 +7,16 @@ FxStateChildTunnel.sol: https://github.com/fx-portal/contracts/blob/main/contrac
 FxBaseChildTunnel.sol : https://github.com/fx-portal/contracts/blob/main/contracts/tunnel/FxBaseChildTunnel.sol
 
 
+//================================================== latest deployed address ===================================================================================//
 
+
+POLYNFT deployed to: 0x161B8EbD4489958675f71Ed803227402EAd118b1
+FxERC721ChildTunnel deployed to :  0x080695c251E1Fb56394B423C33E2d30432904246
+
+EthNft deployed to: 0x99c53C63302e0f2c19FDe8792de8c77A742d43E3
+FxERC721RootTunnel deployed to :  0x6d27acebE8D385A7Dbc62A13a08F280b47b25085
+
+//=================================================== earlier address ===========================================================================================//
 
 POLYNFT deployed to: 0xfFB7E813586Ce5119AF0c74b5fC77F905783B56E
 EthNft deployed to: 0x5E7981f7f890bf0EFe1c0f6C4EedE0cE624f5745
