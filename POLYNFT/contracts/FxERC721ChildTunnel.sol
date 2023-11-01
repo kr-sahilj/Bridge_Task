@@ -116,28 +116,22 @@ contract FxERC721ChildTunnel is OwnableUpgradeable,FxBaseChildTunnel, Create2, I
     }
 
     function _mapToken(bytes memory syncData) internal returns (address) {
-        (address rootToken, string memory name, string memory symbol) = abi.decode(syncData, (address, string, string));
+        (address rootToken1) = abi.decode(syncData, (address));
 
         // get root to child token
-        address childToken1 = rootToChildToken[rootToken];
+        address childToken1 = rootToChildToken[rootToken1];
 
         // check if it's already mapped
         require(childToken1 == address(0x0), "FxERC721ChildTunnel: ALREADY_MAPPED");
 
         // deploy new child token
-        bytes32 salt = keccak256(abi.encodePacked(rootToken));
+        bytes32 salt = keccak256(abi.encodePacked(rootToken1));
         childToken1 = createClone(salt, tokenTemplate);
-        // slither-disable-next-line reentrancy-no-eth
-        IFxERC721(childToken1).initialize(
-            address(this),
-            rootToken,
-            string(abi.encodePacked(name, SUFFIX_NAME)),
-            string(abi.encodePacked(PREFIX_SYMBOL, symbol))
-        );
+        
 
         // map the token
-        rootToChildToken[rootToken] = childToken1;
-        emit TokenMapped(rootToken, childToken1);
+        rootToChildToken[rootToken1] = childToken1;
+        emit TokenMapped(rootToken1, childToken1);
 
         // return new child token
         return childToken1;

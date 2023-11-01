@@ -66,6 +66,10 @@ contract EthNft is OwnableUpgradeable, ERC721Upgradeable {
         safeTransferFrom(from, to, tokenId, "");
     }
 
+    function version() public virtual pure returns (string memory) {
+        return "1.0.0";
+    }
+
     modifier onlyController {
         require(
             controllers[msg.sender],

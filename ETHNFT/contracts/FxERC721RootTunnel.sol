@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import {Create2} from "lib/Create2.sol";
 import {IERC721Receiver} from "lib/IERC721Receiver.sol";
 
-contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IERC721Receiver{
+contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2{
     address public childToken;
     address public rootToken;
 
@@ -62,15 +62,6 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
 
     
 
-    function onERC721Received(
-        address /* operator */,
-        address /* from */,
-        uint256 /* tokenId */,
-        bytes calldata /* data */
-    ) external pure override returns (bytes4) {
-        return this.onERC721Received.selector;
-    }
-
     //  = keccak256(minimalProxyCreationCode(rootToken));
 
     function setChildToken(address _childToken) external onlyOwner {
@@ -97,22 +88,17 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
     //     // compute child token template code hash
     //     childTokenTemplateCodeHash = keccak256(minimalProxyCreationCode(_fxERC721Token));
     // }
-    function mapToken(address rootToken) public {
+    function mapToken(address rootToken1) public {
         // check if token is already mapped
-        require(rootToChildTokens[rootToken] == address(0x0), "FxERC721RootTunnel: ALREADY_MAPPED");
-
-        // name, symbol
-        EthNft rootTokenContract = EthNft(rootToken);
-        string memory name = rootTokenContract.name();
-        string memory symbol = rootTokenContract.symbol();
+        require(rootToChildTokens[rootToken1] == address(0x0), "FxERC721RootTunnel: ALREADY_MAPPED");
 
         // MAP_TOKEN, encode(rootToken, name, symbol)
-        bytes memory message = abi.encode(MAP_TOKEN, abi.encode(rootToken, name, symbol));
+        bytes memory message = abi.encode(MAP_TOKEN, abi.encode(rootToken1));
         // slither-disable-next-line reentrancy-no-eth
         _sendMessageToChild(message);
 
         // compute child token address before deployment using create2
-        bytes32 salt = keccak256(abi.encodePacked(rootToken));
+        bytes32 salt = keccak256(abi.encodePacked(rootToken1));
         address childToken1 = computedCreate2Address(salt, childTokenTemplateCodeHash, fxChildTunnel);
 
         // add into mapped tokens
@@ -124,10 +110,6 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
         // map token if not mapped
         EthNft rootTokenContract = EthNft(rootToken1);
         uint256[] memory expiries = new uint256[](tokenId.length);
-
-        if (rootToChildTokens[rootToken1] == address(0x0)) {
-            mapToken(rootToken1);
-        }
         
 
         for(uint256 i = 0; i < tokenId.length; i++)
@@ -140,12 +122,7 @@ contract FxERC721RootTunnel is OwnableUpgradeable, FxBaseRootTunnel, Create2, IE
             require(expiries[i]>=block.timestamp,"Domain is expired");
 
             // transfer from depositor to this contract
-            rootTokenContract.safeTransferFrom(
-                msg.sender, // depositor
-                address(this), // manager contract
-                tokenId[i],
-                data
-            );
+            rootTokenContract.burnToken(tokenId[i]);
         }
 
         // rootTokenContract.burnToken(tokenId);
