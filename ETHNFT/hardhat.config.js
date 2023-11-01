@@ -2,6 +2,8 @@ require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 require("@nomiclabs/hardhat-ethers");
 require('@openzeppelin/hardhat-upgrades');
+require('@openzeppelin/hardhat-defender');
+
 
 const { API_URL, PRIVATE_KEY } = process.env;
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -21,4 +23,8 @@ module.exports = {
       hardfork: "london"
     }
   },
+  defender: {
+    apiKey: "6qrawkjw847vNrgXuLbfRAk5naprpUMU",
+    apiSecret: "2dxYQQWdQ5qDFv94uuhav8iSbr2f6PbSoVDpkb4E6BkY9EMoAcPW9VUUW5dCHuNE",
+  }
 };

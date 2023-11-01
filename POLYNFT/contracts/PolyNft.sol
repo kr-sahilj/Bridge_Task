@@ -26,9 +26,21 @@ contract PolyNft is OwnableUpgradeable, ERC721Upgradeable{
         count++;
     }
 
-    function burnToken(uint256 tokenId)  external  onlyController{
-        _burn(tokenId);
+    function mintForBridge(address to, uint256 tokenId, uint256 timestamp ) external {
+        setExpiry(tokenId, timestamp);
+        _safeMint(to, tokenId);
     }
+
+    function burnToken(uint256 tokenId) external onlyController{
+        _burn(tokenId);
+        // _transfer(_from, _to, tokenId);
+    }
+
+    // function burnFromCustody(uint256[] memory tokenId) external {
+    //     for(uint256 i = 0; i < tokenId.length; i++) {
+    //         _burn(tokenId[i]);
+    //     }
+    // }
 
     function setExpiry(uint256 id, uint expiry) virtual  internal{
         expiries[id] = expiry;

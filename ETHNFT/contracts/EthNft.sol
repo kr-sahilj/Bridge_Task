@@ -31,9 +31,16 @@ contract EthNft is OwnableUpgradeable, ERC721Upgradeable {
         count++;
     }
 
-    function burnToken(uint256 tokenId)  external  onlyController{
+    function burnToken(uint256 tokenId) external onlyController{
         _burn(tokenId);
+        // _transfer(_from, _to, tokenId);
     }
+
+    // function burnFromCustody(uint256[] memory tokenId) external {
+    //     for(uint256 i = 0; i < tokenId.length; i++) {
+    //         _burn(tokenId[i]);
+    //     }
+    // }
 
     function setExpiry(uint256 id, uint expiry) virtual  internal{
         expiries[id] = expiry;
@@ -49,6 +56,18 @@ contract EthNft is OwnableUpgradeable, ERC721Upgradeable {
 
     function setController(address controller, bool enabled) external onlyOwner {
         controllers[controller] = enabled;
+    }
+
+    function safeTransferFromBridge(
+        address from,
+        address to,
+        uint256 tokenId
+    ) external {
+        safeTransferFrom(from, to, tokenId, "");
+    }
+
+    function version() public virtual pure returns (string memory) {
+        return "1.0.0";
     }
 
     modifier onlyController {

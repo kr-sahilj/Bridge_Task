@@ -14,7 +14,7 @@ async function main() {
   }
   else{
     const polyNftContract = await ethers.getContractFactory("PolyNft");
-    const PolyNftAddress="";
+    const PolyNftAddress="0xb1bb6173A3b4ce95244236C1e74dF291B9800580";
     const polyNftInst = await upgrades.upgradeProxy(PolyNftAddress, polyNftContract);
     console.log("PolyNft updated to:", polyNftInst.address);
   }
